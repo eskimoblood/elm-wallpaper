@@ -3,6 +3,7 @@ module WallpaperGroup.Geom.Util where
 
 import WallpaperGroup.Geom.Point exposing (Point)
 import WallpaperGroup.Geom.Line exposing (Line)
+import WallpaperGroup.Geom.Tile exposing (Tile)
 import List.Extra exposing (last)
 import List as L
 
@@ -10,14 +11,14 @@ mapOverPoints : (Point -> Point) -> Line -> Line
 mapOverPoints transformFunc line =  L.map transformFunc line
 
 
-mapTransform : (Point -> Point) -> List Line -> List Line
+mapTransform : (Point -> Point) -> Tile -> Tile
 mapTransform transformFunc tile =
   let
-    line = last tile
+    line = L.head tile
   in
     case line of
-      Just l -> (L.map (mapOverPoints transformFunc) l) :: tile
-      Nothing -> [tile]
+      Just l -> (L.map  transformFunc l) :: tile
+      Nothing -> tile
 
 
 split : Point -> Point -> Float -> Point

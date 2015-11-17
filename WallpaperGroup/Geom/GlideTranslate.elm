@@ -1,11 +1,11 @@
 module WallpaperGroup.Geom.GlideTranslate where
 
 import WallpaperGroup.Geom.Point exposing (Point)
-import WallpaperGroup.Geom.Line exposing (Line)
+import WallpaperGroup.Geom.Tile exposing (Tile)
 import WallpaperGroup.Geom.Util exposing (mapTransform)
 
-_glideTranslate : (Point -> Point) -> Float -> Float -> Point -> Point
-_glideTranslate mirrorFn offsetX offsetY point =
+glideTranslate' : (Point -> Point) -> Float -> Float -> Point -> Point
+glideTranslate' mirrorFn offsetX offsetY point =
   let
     p = mirrorFn(point)
   in
@@ -14,5 +14,5 @@ _glideTranslate mirrorFn offsetX offsetY point =
       y= p.y + offsetY
      }
 
-glideTranslate : (Point -> Point) -> Float -> Float -> (List Line -> List Line)
-glideTranslate mirrorFn offsetX offsetY =  mapTransform (_glideTranslate mirrorFn offsetX offsetY)
+glideTranslate : (Point -> Point) -> Float -> Float -> (Tile -> Tile)
+glideTranslate mirrorFn offsetX offsetY =  mapTransform (glideTranslate' mirrorFn offsetX offsetY)

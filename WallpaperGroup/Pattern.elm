@@ -1,7 +1,6 @@
 module WallpaperGroup.Pattern where
 
-
-import WallpaperGroup.Geom.Point exposing (Point)
+import WallpaperGroup.Geom.Point exposing (Point, add)
 import WallpaperGroup.Geom.Line exposing (Line)
 import WallpaperGroup.Geom.Tile exposing (Tile)
 import WallpaperGroup.Group exposing (Group)
@@ -19,15 +18,15 @@ translateTile : Point -> Line -> Line
 translateTile transition line=  List.map (add transition) line
 
 
-translate : Point -> Tile -> Tile
-translate  transition tile = List.map (translateTile transition) tile
+translate : Tile -> Point ->  Tile
+translate  tile transition = List.map (translateTile transition) tile
 
 
 pattern : Group -> Int -> Int -> Tile -> List Tile
 pattern group columns rows lines =
-  let tile = List.concat (calculateTile lines group.steps);
+  let tile = calculateTile lines group.steps
       numberOfTiles = columns * rows
   in
     [0..numberOfTiles]
       |> List.map group.translate
-      |> List.map translate tile
+      |> List.map (translate tile)

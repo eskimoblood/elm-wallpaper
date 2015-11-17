@@ -1,10 +1,12 @@
 module WallpaperGroup.Geom.Mirror where
 
-import WallpaperGroup.Geom.Point
-import WallpaperGroup.Geom.Line
+import WallpaperGroup.Geom.Point exposing (Point, subtract)
+import WallpaperGroup.Geom.Line exposing (Line)
 import WallpaperGroup.Geom.Util exposing (mapTransform)
 
-mirror : Line -> Point -> Point
+type alias Axis = {p1: Point, p2: Point}
+
+mirror : Axis -> Point -> Point
 mirror {p1, p2} point =
   let d = subtract p2 p1
       e = subtract point p1
@@ -17,19 +19,19 @@ mirror {p1, p2} point =
       }
 
 mirrorHorizontal : Float -> Float -> (List Line -> List Line)
-mirrorHorizontal w h = mapTransform (mirror [{x= 0, y= w}, {x= 2 * w, y= h}])
+mirrorHorizontal w h = mapTransform (mirror {p1= {x= 0, y= w}, p2= {x= 2 * w, y= h}})
 
 mirrorVertical: Float -> Float -> (List Line -> List Line)
-mirrorVertical w h = mapTransform (mirror [{x= w, y= 0}, {x= w, y= 2 * h}])
+mirrorVertical w h = mapTransform (mirror {p1= {x= w, y= 0}, p2= {x= w, y= 2 * h}})
 
 mirrorDiagonalRL: Float -> Float -> (List Line -> List Line)
-mirrorDiagonalRL w h = mapTransform (mirror [{x= 0, y= 0}, {x= w, y= h}])
+mirrorDiagonalRL w h = mapTransform (mirror {p1= {x= 0, y= 0}, p2= {x= w, y= h}})
 
 mirrorDiagonalLR: Float -> Float -> (List Line -> List Line)
-mirrorDiagonalLR w h = mapTransform (mirror([{x= w, y= 0}, {x= 0, y= h}])
+mirrorDiagonalLR w h = mapTransform (mirror {p1= {x= w, y= 0}, p2= {x= 0, y= h}})
 
 mirrorHex : Float -> (List Line -> List Line)
-mirrorHex w = mapTransform (mirror[{x= Math.sqrt(3) / 2 * w, y= w}, {x= 0, y= w * 0.5}])
+mirrorHex w = mapTransform (mirror {p1= {x= (sqrt 3) / 2 * w, y= w}, p2= {x= 0, y= w * 0.5}})
 
-mirrorDiagonalLR: Float -> Float -> (List Line -> List Line)
-mirrorTriangle w h = mapTransform (mirror [{x= w / 2, y= 0}, {x= w, y= h}])
+mirrorTriangle: Float -> Float -> (List Line -> List Line)
+mirrorTriangle w h = mapTransform (mirror {p1= {x= w / 2, y= 0}, p2= {x= w, y= h}})

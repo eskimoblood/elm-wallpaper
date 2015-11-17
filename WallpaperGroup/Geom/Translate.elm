@@ -22,8 +22,8 @@ translate fW fH width height columns i =
   }
 
 
-_translateShifted :  number -> number -> number -> Int -> Int -> Point
-_translateShifted fH width height columns i =
+translateShifted :  number -> number -> number -> Int -> Int -> Point
+translateShifted fH width height columns i =
   let
     offsetX = if | (i // columns) % 2 == 0 ->  width / 2
                  | otherwise -> 0
@@ -51,8 +51,8 @@ w2h2 = translate 2 2
 
 
 shifted : (number  -> number  -> Int -> Int -> Point)
-shifted = _translateShifted 1
+shifted = translateShifted 1
 
 
 hex : (number  -> number  -> Int -> Int -> Point)
-hex = _translateShifted 0.75
+hex = translateShifted 0.75
