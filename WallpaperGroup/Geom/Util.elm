@@ -11,14 +11,14 @@ mapOverPoints : (Point -> Point) -> Line -> Line
 mapOverPoints transformFunc line =  L.map transformFunc line
 
 
-mapTransform : (Point -> Point) -> Tile -> Tile
-mapTransform transformFunc tile =
+mapTransform : (Point -> Point) -> List Tile -> List Tile
+mapTransform transformFunc tiles =
   let
-    line = L.head tile
+    tile = L.head tiles
   in
-    case line of
-      Just l -> (L.map  transformFunc l) :: tile
-      Nothing -> tile
+    case tile of
+      Just t -> (L.map  (mapOverPoints transformFunc) t) :: tiles
+      Nothing -> tiles
 
 
 split : Point -> Point -> Float -> Point

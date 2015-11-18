@@ -10,134 +10,134 @@ import WallpaperGroup.Geom.Rotate exposing (rotate90, rotate120, rotate180)
 import WallpaperGroup.Geom.Translate as Translate
 import List as L
 
-linesToTile :  Tile ->  Tile
-linesToTile lines = [L.concat lines]
+linesToTile :  List Tile ->  List Tile
+linesToTile tiles = [L.concat tiles]
 
 
 type alias Setting = {
-  steps: List (Tile -> Tile),
-  translate:  (Int -> Point),
+  steps: List (List Tile -> List Tile),
+  translate:  (Int -> Int -> Point),
   tileCoordinates: List Point
 }
 
 
 type Group
-  = P1 Float Float Int
-  | P2 Float Float Int
-  | Pm Float Float Int
-  | Pg Float Float Int
-  | Cm Float Float Int
-  | P2mm Float Float Int
-  | P2mg Float Float Int
-  | P2gg Float Float Int
-  | C2mm Float Float Int
-  | P4 Float Float Int
-  | P4mm Float Float Int
-  | P4mg Float Float Int
-  | P3 Float Int
-  | P3m1 Float Int
-  | P31m Float Int
-  | P6 Float Int
+  = P1 Float Float
+  | P2 Float Float
+  | Pm Float Float
+  | Pg Float Float
+  | Cm Float Float
+  | P2mm Float Float
+  | P2mg Float Float
+  | P2gg Float Float
+  | C2mm Float Float
+  | P4 Float Float
+  | P4mm Float Float
+  | P4mg Float Float
+  | P3 Float
+  | P3m1 Float
+  | P31m Float
+  | P6 Float
 
 
 group : Group -> Setting
 group gr =
   case gr of
-    P1 w h columns ->
+    P1 w h ->
       {
         steps= [],
-        translate= Translate.w1h1 w h columns,
+        translate= Translate.w1h1 w h,
         tileCoordinates= Util.rectCoords w h
       }
 
-    P2 w h columns ->
+    P2 w h  ->
       {
         steps= [
           rotate180 {x= w / 2, y= h}
         ],
-        translate= Translate.w1h2 w h columns,
+        translate= Translate.w1h2 w h ,
         tileCoordinates= Util.rectCoords w h
       }
 
-    Pm w h columns ->
+    Pm w h  ->
       {
         steps= [
           Mirror.mirrorVertical w h
         ],
-        translate= Translate.w1h2 w h columns,
+        translate= Translate.w1h2 w h ,
         tileCoordinates= Util.rectCoords w h
       }
 
-    Pg w h columns ->
+    Pg w h  ->
       {
         steps= [
           glideTranslate (Mirror.mirror {p1= {x= 0, y= h / 2}, p2= {x= w, y= h / 2}}) w 0
         ],
-        translate= Translate.w2h1 w h columns,
+        translate= Translate.w2h1 w h ,
         tileCoordinates= Util.rectCoords w h
       }
 
-    Cm w h columns ->
+    Cm w h  ->
       {
         steps= [
           Mirror.mirrorHorizontal w h
         ],
-        translate= Translate.shifted w h columns,
+        translate= Translate.shifted w h ,
         tileCoordinates= Util.triangleCoords w h
       }
 
-    P2mm w h columns ->
+    P2mm w h ->
       {
         steps= [
           Mirror.mirrorHorizontal w h,
           linesToTile,
           Mirror.mirrorVertical w h
         ],
-        translate= Translate.w2h2 w h columns,
+        translate= Translate.w2h2 w h ,
         tileCoordinates= Util.rectCoords w h
       }
 
-    P2mg w h columns ->
+    P2mg w h ->
       {
         steps= [
           rotate180 {x= w, y= h / 2}
         ],
-        translate= Translate.w2h2 w h columns,
+        translate= Translate.w2h2 w h ,
         tileCoordinates= Util.rectCoords w h
       }
 
-    P2gg w h columns ->
+    P2gg w h ->
       {
         steps= [
           rotate180 {x= w / 2, y= h}
         ],
-        translate= Translate.shifted w h columns,
+        translate= Translate.shifted w h ,
         tileCoordinates= Util.rectCoords w h
       }
 
-    C2mm w h columns ->
+    C2mm w h ->
       {
         steps= [
           Mirror.mirrorHorizontal w h,
           Mirror.mirrorVertical w h,
           Mirror.mirrorHorizontal w h
         ],
-        translate= Translate.shifted (w * 2) h columns,
+        translate= Translate.shifted (w * 2) h ,
         tileCoordinates= Util.rectCoords w h
       }
 
-    P4 w h columns ->
+    P4 w h ->
       {
         steps= [
           rotate90 {x= w, y= h},
           rotate90 {x= w, y= h},
           rotate90 {x= w, y= h}
         ],
-        translate= Translate.w2h2 w h columns,
+        translate= Translate.w2h2 w h ,
         tileCoordinates= Util.rectCoords w h
       }
 
-    P4mm w h columns ->
+    P4mm w h ->
       {
         steps= [
           Mirror.mirrorDiagonalRL w h,
@@ -146,7 +146,7 @@ group gr =
           rotate90 {x= w, y= h},
           rotate90 {x= w, y= h}
         ],
-        translate= Translate.w2h2 w h columns,
+        translate= Translate.w2h2 w h ,
         tileCoordinates= [
           {x= 0, y= 0},
           {x= w, y= h},
@@ -154,7 +154,7 @@ group gr =
         ]
       }
 
-    P4mg w h columns ->
+    P4mg w h ->
       {
         steps= [
           Mirror.mirrorDiagonalLR w h,
@@ -163,11 +163,11 @@ group gr =
           rotate90 {x= w, y= h},
           rotate90 {x= w, y= h}
         ],
-        translate= Translate.w2h2 w h columns,
+        translate= Translate.w2h2 w h ,
         tileCoordinates= Util.rightTriangleCoords w h
       }
 
-    P3 w columns ->
+    P3 w ->
       let centerX = (sqrt 3) / 2 * w
       in
         {
@@ -175,7 +175,7 @@ group gr =
             rotate120 {x= centerX, y= w},
             rotate120 {x= centerX, y= w}
           ],
-          translate= Translate.hex (centerX * 2) (w * 2) columns,
+          translate= Translate.hex (centerX * 2) (w * 2) ,
           tileCoordinates= [
             {x= 0, y= w / 2},
             {x= centerX, y= w},
@@ -184,7 +184,7 @@ group gr =
           ]
         }
 
-    P3m1 w columns ->
+    P3m1 w ->
       let centerX = (sqrt 3) / 2 * w
       in
         {
@@ -194,7 +194,7 @@ group gr =
             rotate120 {x= centerX, y= w},
             rotate120 {x= centerX, y= w}
           ],
-          translate= Translate.hex (centerX * 2) (w * 2) columns,
+          translate= Translate.hex (centerX * 2) (w * 2) ,
           tileCoordinates= [
             {x= centerX, y= w},
             {x= 0, y= w * 0.5},
@@ -202,7 +202,7 @@ group gr =
           ]
         }
 
-    P31m w columns ->
+    P31m w ->
       let h = (sqrt 3) / 2 * w
       in
         {
@@ -212,7 +212,7 @@ group gr =
             linesToTile,
             Mirror.mirrorTriangle w h
           ],
-          translate= Translate.shifted w h columns,
+          translate= Translate.shifted w h,
           tileCoordinates= [
             {x= 0, y= h},
             {x= w / 2, y= 2 * h / 3},
@@ -220,7 +220,7 @@ group gr =
           ]
         }
 
-    P6 w columns ->
+    P6 w ->
       let h = (sqrt 3) / 2 * w
       in
         {
@@ -230,7 +230,7 @@ group gr =
             linesToTile,
             rotate180 (Util.split {x= w / 2, y= 0} {x= w , y= h}  0.5)
           ],
-          translate= Translate.shifted w h columns,
+          translate= Translate.shifted w h,
           tileCoordinates= [
             {x= 0, y= h},
             {x= w / 2, y= 2 * h / 3},

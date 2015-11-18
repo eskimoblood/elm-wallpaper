@@ -2,7 +2,7 @@ module WallpaperGroup.Geom.Rotate where
 
 
 import WallpaperGroup.Geom.Point exposing (Point)
-import WallpaperGroup.Geom.Line exposing (Line)
+import WallpaperGroup.Geom.Tile exposing (Tile)
 import WallpaperGroup.Geom.Util exposing (mapTransform)
 
 
@@ -20,13 +20,13 @@ rotate theta center p =
      }
 
 
-rotate90 : Point -> (List Line -> List Line)
+rotate90 : Point -> (List Tile -> List Tile)
 rotate90 center = mapTransform (rotate 90 center)
 
 
-rotate120 : Point -> (List Line -> List Line)
+rotate120 : Point -> (List Tile -> List Tile)
 rotate120 center = mapTransform (rotate 120 center)
 
 
-rotate180 : Point -> (List Line -> List Line)
+rotate180 : Point -> (List Tile -> List Tile)
 rotate180 center = mapTransform (rotate 180 center)

@@ -14,5 +14,5 @@ glideTranslate' mirrorFn offsetX offsetY point =
       y= p.y + offsetY
      }
 
-glideTranslate : (Point -> Point) -> Float -> Float -> (Tile -> Tile)
+glideTranslate : (Point -> Point) -> Float -> Float -> (List Tile -> List Tile)
 glideTranslate mirrorFn offsetX offsetY =  mapTransform (glideTranslate' mirrorFn offsetX offsetY)
