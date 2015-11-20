@@ -11,7 +11,7 @@ Creates wallpaper group based pattern
 import WallpaperGroup.Geom.Point exposing (Point, add)
 import WallpaperGroup.Geom.Line exposing (Line)
 import WallpaperGroup.Geom.Tile exposing (Tile)
-import WallpaperGroup.Group exposing (Setting)
+import WallpaperGroup.Group exposing (..)
 
 
 calcStep :  (List Tile -> List Tile) -> List Tile -> List Tile
@@ -30,11 +30,12 @@ translate : Tile -> Point ->  Tile
 translate  tile transition = List.map (translateTile transition) tile
 
 {-|-}
-pattern : Setting -> Int -> Int -> Tile -> List Tile
+pattern : Group -> Int -> Int -> Tile -> List Tile
 pattern group columns rows lines =
-  let tile = calculateTile lines group.steps
-      numberOfTiles = columns * rows
+  let settings = getGroupSettings group
+      tile = calculateTile lines settings.steps
+      numberOfTiles = columns * rows - 1
   in
     [0..numberOfTiles]
-      |> List.map (group.translate columns)
+      |> List.map (settings.translate columns)
       |> List.map (translate tile)

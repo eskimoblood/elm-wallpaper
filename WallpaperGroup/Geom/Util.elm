@@ -4,7 +4,6 @@ module WallpaperGroup.Geom.Util where
 import WallpaperGroup.Geom.Point exposing (Point)
 import WallpaperGroup.Geom.Line exposing (Line)
 import WallpaperGroup.Geom.Tile exposing (Tile)
-import List.Extra exposing (last)
 import List as L
 
 mapOverPoints : (Point -> Point) -> Line -> Line

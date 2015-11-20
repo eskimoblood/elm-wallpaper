@@ -40,8 +40,8 @@ type Group
   | P6 Float
 
 
-group : Group -> Setting
-group gr =
+getGroupSettings : Group -> Setting
+getGroupSettings gr =
   case gr of
     P1 w h ->
       {

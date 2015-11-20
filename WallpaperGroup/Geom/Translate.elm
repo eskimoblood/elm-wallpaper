@@ -6,15 +6,15 @@ import WallpaperGroup.Geom.Line exposing (Line)
 import WallpaperGroup.Geom.Util exposing (mapTransform)
 
 
-w : number -> Int -> Int -> Float
+w : Float -> Int -> Int -> Float
 w width i columns = width * toFloat(i % columns)
 
 
-h : number -> Int -> Int -> Float
+h : Float -> Int -> Int -> Float
 h height i columns =  height * toFloat (i // columns)
 
 
-translate : number -> number -> number  -> number  -> Int -> Int -> Point
+translate : Float -> Float -> Float  -> Float  -> Int -> Int -> Point
 translate fW fH width height columns i =
   {
     x = fW * w width i columns,
@@ -22,11 +22,13 @@ translate fW fH width height columns i =
   }
 
 
-translateShifted :  number -> number -> number -> Int -> Int -> Point
+translateShifted :  Float -> Float -> Float -> Int -> Int -> Point
 translateShifted fH width height columns i =
   let
-    offsetX = if | (i // columns) % 2 == 0 ->  width / 2
-                 | otherwise -> 0
+    offsetX = if  (i // columns) % 2 == 0 then
+                width / 2
+              else
+                0
   in
     {
       x= offsetX + w width i columns,
@@ -34,25 +36,25 @@ translateShifted fH width height columns i =
     }
 
 
-w1h1 : (number  -> number  -> Int -> Int -> Point)
+w1h1 : (Float  -> Float  -> Int -> Int -> Point)
 w1h1 = translate 1 1
 
 
-w1h2 : (number  -> number  -> Int -> Int -> Point)
+w1h2 : (Float  -> Float  -> Int -> Int -> Point)
 w1h2 = translate 1 2
 
 
-w2h1 : (number  -> number  -> Int -> Int -> Point)
+w2h1 : (Float  -> Float  -> Int -> Int -> Point)
 w2h1 = translate 2 1
 
 
-w2h2 : (number  -> number  -> Int -> Int -> Point)
+w2h2 : (Float  -> Float  -> Int -> Int -> Point)
 w2h2 = translate 2 2
 
 
-shifted : (number  -> number  -> Int -> Int -> Point)
+shifted : (Float  -> Float  -> Int -> Int -> Point)
 shifted = translateShifted 1
 
 
-hex : (number  -> number  -> Int -> Int -> Point)
+hex : (Float  -> Float  -> Int -> Int -> Point)
 hex = translateShifted 0.75
