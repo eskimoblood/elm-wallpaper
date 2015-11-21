@@ -30,7 +30,10 @@ translateTile transition line=  List.map (add transition) line
 translate : Tile -> Point ->  Tile
 translate  tile transition = List.map (translateTile transition) tile
 
-{-|-}
+{-|
+  Create pattern by passing a group the number of columns and rows and tiles.
+
+-}
 pattern : Group -> Int -> Int -> Tile -> List Tile
 pattern group columns rows lines =
   let settings = getGroupSettings group

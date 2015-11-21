@@ -1,19 +1,17 @@
 {
     "version": "1.0.0",
-    "summary": "helpful summary of your project, less than 80 characters",
+    "summary": "create wallpaper group based patterns",
     "repository": "https://github.com/eskimoblood/elm-wallpaper.git",
     "license": "BSD3",
     "source-directories": [
         "."
     ],
     "exposed-modules": [
-      "WallpaperGroup.Pattern"
+        "WallpaperGroup.Pattern",
+        "WallpaperGroup.Group"
     ],
     "dependencies": {
-        "circuithub/elm-list-extra": "3.7.0 <= v < 4.0.0",
-        "elm-lang/core": "2.1.0 <= v < 4.0.0",
-        "evancz/elm-html": "4.0.1 <= v < 5.0.0"
-        "elm-lang/core": "3.0.0 <= v < 4.0.0",
+        "elm-lang/core": "3.0.0 <= v < 4.0.0"
     },
     "elm-version": "0.16.0 <= v < 0.17.0"
 }
