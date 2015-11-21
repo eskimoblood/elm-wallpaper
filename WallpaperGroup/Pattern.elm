@@ -11,7 +11,8 @@ Creates wallpaper group based pattern
 import WallpaperGroup.Geom.Point exposing (Point, add)
 import WallpaperGroup.Geom.Line exposing (Line)
 import WallpaperGroup.Geom.Tile exposing (Tile)
-import WallpaperGroup.Group exposing (..)
+import WallpaperGroup.Group exposing (Group)
+import WallpaperGroup.Settings exposing (getGroupSettings)
 
 
 calcStep :  (List Tile -> List Tile) -> List Tile -> List Tile
