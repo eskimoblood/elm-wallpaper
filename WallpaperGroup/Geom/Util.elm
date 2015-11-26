@@ -4,6 +4,8 @@ module WallpaperGroup.Geom.Util where
 import WallpaperGroup.Geom.Point exposing (Point)
 import WallpaperGroup.Geom.Line exposing (Line)
 import WallpaperGroup.Geom.Tile exposing (Tile)
+import WallpaperGroup.Geom.BoundingBox exposing (..)
+
 import List as L
 
 mapOverPoints : (Point -> Point) -> Line -> Line
@@ -28,23 +30,15 @@ split start end percentage =
   }
 
 
-rectCoords : Float -> Float -> Line
-rectCoords w h = [
-  {x= 0, y= 0},
-  {x= w, y= 0},
-  {x= w, y= h},
-  {x= 0, y= h}]
+rectCoords : Float -> Float -> BoundingBox
+rectCoords w h =
+  Rect  {x= 0, y= 0} {x= w, y= 0} {x= w, y= h} {x= 0, y= h}
 
 
-triangleCoords : Float -> Float -> Line
-triangleCoords w h = [
-  {x= w / 2, y= 0},
-  {x= w, y= h},
-  {x= 0, y= h}]
+triangleCoords : Float -> Float -> BoundingBox
+triangleCoords w h =
+  Triangle {x= w / 2, y= 0} {x= w, y= h} {x= 0, y= h}
 
 
-rightTriangleCoords : Float -> Float -> Line
-rightTriangleCoords w h =[
-  {x= w, y= 0},
-  {x= w, y= h},
-  {x= 0, y= h}]
+rightTriangleCoords : Float -> Float -> BoundingBox
+rightTriangleCoords w h =Triangle {x= w, y= 0} {x= w, y= h} {x= 0, y= h}

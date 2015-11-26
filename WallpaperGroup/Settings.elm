@@ -5,11 +5,13 @@ import WallpaperGroup.Group exposing (..)
 import WallpaperGroup.Geom.Point exposing (Point)
 import WallpaperGroup.Geom.Line exposing (Line)
 import WallpaperGroup.Geom.Tile exposing (Tile)
+import WallpaperGroup.Geom.BoundingBox exposing (..)
 import WallpaperGroup.Geom.Util as Util
 import WallpaperGroup.Geom.GlideTranslate exposing (glideTranslate)
 import WallpaperGroup.Geom.Mirror as Mirror
 import WallpaperGroup.Geom.Rotate exposing (rotate90, rotate120, rotate180)
 import WallpaperGroup.Geom.Translate as Translate
+
 import List as L
 
 
@@ -20,10 +22,8 @@ linesToTile tiles = [L.concat tiles]
 type alias Setting = {
   steps: List (List Tile -> List Tile),
   translate:  (Int -> Int -> Point),
-  tileCoordinates: List Point
+  tileCoordinates: BoundingBox
 }
-
-
 
 
 getGroupSettings : Group -> Setting
@@ -133,11 +133,7 @@ getGroupSettings gr =
           rotate90 {x= w, y= h}
         ],
         translate= Translate.w2h2 w h ,
-        tileCoordinates= [
-          {x= 0, y= 0},
-          {x= w, y= h},
-          {x= 0, y= h}
-        ]
+        tileCoordinates= Triangle  {x= 0, y= 0} {x= w, y= h} {x= 0, y= h}
       }
 
     P4mg w h ->
@@ -162,12 +158,7 @@ getGroupSettings gr =
             rotate120 {x= centerX, y= w}
           ],
           translate= Translate.hex (centerX * 2) (w * 2) ,
-          tileCoordinates= [
-            {x= 0, y= w / 2},
-            {x= centerX, y= w},
-            {x= centerX, y= w * 2},
-            {x= 0, y= w * 1.5}
-          ]
+          tileCoordinates= Rect  {x= 0, y= w / 2} {x= centerX, y= w} {x= centerX, y= w * 2} {x= 0, y= w * 1.5}
         }
 
     P3m1 w ->
@@ -181,11 +172,7 @@ getGroupSettings gr =
             rotate120 {x= centerX, y= w}
           ],
           translate= Translate.hex (centerX * 2) (w * 2) ,
-          tileCoordinates= [
-            {x= centerX, y= w},
-            {x= 0, y= w * 0.5},
-            {x= 0, y= w * 1.5}
-          ]
+          tileCoordinates= Triangle {x= centerX, y= w} {x= 0, y= w * 0.5} {x= 0, y= w * 1.5}
         }
 
     P31m w ->
@@ -199,11 +186,7 @@ getGroupSettings gr =
             Mirror.mirrorTriangle w h
           ],
           translate= Translate.shifted w h,
-          tileCoordinates= [
-            {x= 0, y= h},
-            {x= w / 2, y= 2 * h / 3},
-            {x= w, y= h}
-          ]
+          tileCoordinates= Triangle {x= 0, y= h} {x= w / 2, y= 2 * h / 3} {x= w, y= h}
         }
 
     P6 w ->
@@ -217,9 +200,5 @@ getGroupSettings gr =
             rotate180 (Util.split {x= w / 2, y= 0} {x= w , y= h}  0.5)
           ],
           translate= Translate.shifted w h,
-          tileCoordinates= [
-            {x= 0, y= h},
-            {x= w / 2, y= 2 * h / 3},
-            {x= w, y= h}
-          ]
+          tileCoordinates= Triangle {x= 0, y= h} {x= w / 2, y= 2 * h / 3} {x= w, y= h}
         }
