@@ -34,7 +34,7 @@ translate  tile transition = List.map (translateTile transition) tile
   Create pattern by passing a group the number of columns and rows and tiles.
 
 -}
-pattern : Group -> Int -> Int -> Tile -> List Tile
+pattern : Group -> Int -> Int -> List (List {x: Float, y: Float}) -> List (List (List {x: Float, y: Float}))
 pattern group columns rows lines =
   let settings = getGroupSettings group
       tile = calculateTile lines settings.steps

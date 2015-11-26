@@ -7,7 +7,10 @@ The predefined Groups according to
 @docs Group
 -}
 
-{-|-}
+{-|
+Create a pattern width the specific width and/or height.
+For triangle shaped pattern only the width of the base line is needed.
+-}
 type Group
   = P1 Float Float
   | P2 Float Float
