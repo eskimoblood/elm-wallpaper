@@ -1,16 +1,18 @@
-module WallpaperGroup.Pattern (pattern) where
+module WallpaperGroup.Pattern (pattern, bounding) where
 
 {-|
 Creates wallpaper group based pattern
 
 #create pattern
 @docs pattern
+@docs bounding
 
 -}
 
 import WallpaperGroup.Geom.Point exposing (Point, add)
 import WallpaperGroup.Geom.Line exposing (Line)
 import WallpaperGroup.Geom.Tile exposing (Tile)
+import WallpaperGroup.Geom.BoundingBox exposing (BoundingBox)
 import WallpaperGroup.Group exposing (Group)
 import WallpaperGroup.Settings exposing (getGroupSettings)
 
@@ -43,3 +45,10 @@ pattern group columns rows lines =
     [0..numberOfTiles]
       |> List.map (settings.translate columns)
       |> List.map (translate tile)
+
+{-|
+  get the bounding box for a specific pattern group
+
+-}
+bounding : Group -> BoundingBox
+bounding group  = .tileCoordinates (getGroupSettings group)
