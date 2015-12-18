@@ -194,8 +194,8 @@ getGroupSettings gr =
       in
         {
           steps= [
-            rotate180 (Util.split {x= w / 2, y= 0} {x= w , y= h} 0.5),
-            rotate180 (Util.split {x= w / 2, y= 0} {x= w , y= h} 0.5),
+            rotate120 {x= w / 2, y= 2 * h / 3},
+            rotate120 {x= w / 2, y= 2 * h / 3},
             linesToTile,
             rotate180 (Util.split {x= w / 2, y= 0} {x= w , y= h}  0.5)
           ],
