@@ -50,7 +50,7 @@ getGroupSettings gr =
         steps= [
           Mirror.mirrorVertical w h
         ],
-        translate= Translate.w1h2 w h ,
+        translate= Translate.w2h1 w h ,
         tileCoordinates= Util.rectCoords w h
       }
 
