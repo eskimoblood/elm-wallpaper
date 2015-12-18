@@ -26,9 +26,9 @@ translateShifted :  Float -> Float -> Float -> Int -> Int -> Point
 translateShifted fH width height columns i =
   let
     offsetX = if  (i // columns) % 2 == 0 then
-                width / 2
-              else
                 0
+              else
+                width / 2
   in
     {
       x= offsetX + w width i columns,
