@@ -1,7 +1,7 @@
-module WallpaperGroup.Geom.Tile where
-
+module WallpaperGroup.Geom.Tile (..) where
 
 import WallpaperGroup.Geom.Line exposing (Line)
 
 
-type alias Tile = List Line
+type alias Tile =
+    List Line
