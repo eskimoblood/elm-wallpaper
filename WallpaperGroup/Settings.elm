@@ -86,7 +86,9 @@ getGroupSettings gr =
     P2mg w h ->
       {
         steps= [
-          rotate180 {x= w, y= h / 2}
+          rotate180 {x= w, y= h / 2},
+          linesToTile,
+          Mirror.mirrorHorizontal w h
         ],
         translate= Translate.w2h2 w h ,
         tileCoordinates= Util.rectCoords w h
@@ -97,7 +99,7 @@ getGroupSettings gr =
         steps= [
           rotate180 {x= w / 2, y= h}
         ],
-        translate= Translate.shifted w h ,
+        translate= Translate.shifted (w * 2) h ,
         tileCoordinates= Util.rectCoords w h
       }
 
@@ -108,7 +110,7 @@ getGroupSettings gr =
           Mirror.mirrorVertical w h,
           Mirror.mirrorHorizontal w h
         ],
-        translate= Translate.shifted (w * 2) h ,
+        translate= Translate.shifted (w * 2) (h*2) ,
         tileCoordinates= Util.rectCoords w h
       }
 
