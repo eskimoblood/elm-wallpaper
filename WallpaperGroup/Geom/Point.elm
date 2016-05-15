@@ -1,4 +1,4 @@
-module WallpaperGroup.Geom.Point (..) where
+module WallpaperGroup.Geom.Point exposing (..) 
 
 
 type alias Point =

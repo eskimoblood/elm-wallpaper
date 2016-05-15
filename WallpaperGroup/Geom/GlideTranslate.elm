@@ -1,4 +1,4 @@
-module WallpaperGroup.Geom.GlideTranslate (..) where
+module WallpaperGroup.Geom.GlideTranslate exposing(..) 
 
 import WallpaperGroup.Geom.Point exposing (Point)
 import WallpaperGroup.Geom.Tile exposing (Tile)

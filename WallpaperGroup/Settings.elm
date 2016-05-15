@@ -1,4 +1,4 @@
-module WallpaperGroup.Settings (..) where
+module WallpaperGroup.Settings exposing (..) 
 
 import WallpaperGroup.Group exposing (..)
 import WallpaperGroup.Geom.Point exposing (Point)

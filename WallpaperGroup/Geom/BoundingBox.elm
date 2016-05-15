@@ -1,4 +1,4 @@
-module WallpaperGroup.Geom.BoundingBox (..) where
+module WallpaperGroup.Geom.BoundingBox exposing (..) 
 
 {-|
 Bounding box of a single pattern.

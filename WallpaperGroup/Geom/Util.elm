@@ -1,4 +1,4 @@
-module WallpaperGroup.Geom.Util (..) where
+module WallpaperGroup.Geom.Util exposing  (..) 
 
 import WallpaperGroup.Geom.Point exposing (Point)
 import WallpaperGroup.Geom.Line exposing (Line)

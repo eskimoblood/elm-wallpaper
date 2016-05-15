@@ -1,4 +1,4 @@
-module WallpaperGroup.Geom.Rotate (..) where
+module WallpaperGroup.Geom.Rotate exposing (..) 
 
 import WallpaperGroup.Geom.Point exposing (Point)
 import WallpaperGroup.Geom.Tile exposing (Tile)

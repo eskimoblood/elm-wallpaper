@@ -1,4 +1,4 @@
-module WallpaperGroup.Group (..) where
+module WallpaperGroup.Group exposing (..)
 
 {-|
 The predefined Groups according to

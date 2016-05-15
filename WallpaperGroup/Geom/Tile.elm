@@ -1,4 +1,4 @@
-module WallpaperGroup.Geom.Tile (..) where
+module WallpaperGroup.Geom.Tile exposing (..) 
 
 import WallpaperGroup.Geom.Line exposing (Line)
 

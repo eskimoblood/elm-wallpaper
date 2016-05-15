@@ -1,4 +1,4 @@
-module WallpaperGroup.Geom.Mirror (..) where
+module WallpaperGroup.Geom.Mirror exposing (..)
 
 import WallpaperGroup.Geom.Point exposing (Point, subtract)
 import WallpaperGroup.Geom.Tile exposing (Tile)

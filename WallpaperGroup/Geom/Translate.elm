@@ -1,4 +1,4 @@
-module WallpaperGroup.Geom.Translate (..) where
+module WallpaperGroup.Geom.Translate exposing (..) 
 
 import WallpaperGroup.Geom.Point exposing (Point)
 

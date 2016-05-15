@@ -1,4 +1,4 @@
-module WallpaperGroup.Pattern (pattern, bounding) where
+module WallpaperGroup.Pattern exposing (pattern, bounding)
 
 {-|
 Creates wallpaper group based pattern
