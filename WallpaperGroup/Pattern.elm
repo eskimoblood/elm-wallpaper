@@ -9,6 +9,7 @@ Creates wallpaper group based pattern
 
 -}
 
+import List exposing (range)
 import WallpaperGroup.Geom.Point exposing (Point, add)
 import WallpaperGroup.Geom.Line exposing (Line)
 import WallpaperGroup.Geom.Tile exposing (Tile)
@@ -44,13 +45,16 @@ translate tile transition =
 pattern : Group -> Int -> Int -> List (List { x : Float, y : Float }) -> List (List (List { x : Float, y : Float }))
 pattern group columns rows lines =
     let
-        settings = getGroupSettings group
+        settings =
+            getGroupSettings group
 
-        tile = calculateTile lines settings.steps
+        tile =
+            calculateTile lines settings.steps
 
-        numberOfTiles = columns * rows - 1
+        numberOfTiles =
+            columns * rows - 1
     in
-        [0..numberOfTiles]
+        range 0 numberOfTiles
             |> List.map (settings.translate columns)
             |> List.map (translate tile)
 
